@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:safetech_app/models/fullname.dart';
+import 'package:safetech_app/models/user.dart';
+import 'package:safetech_app/utils/http_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -19,7 +23,38 @@ class Home_user extends StatefulWidget {
 }
 
 class _Home_userState extends State<Home_user> {
+  HttpHelper httpHelper = HttpHelper();
+
+  User user = new User(
+      id: 1,
+      fullName: FullName(firstName: "", lastName: ""),
+      dni: "",
+      email: "",
+      password: "",
+      profilePictureUrl: "",
+      address: "",
+      phone: "",
+      birthdayDate: "");
+
+  @override
+  void initState() {
+    httpHelper = HttpHelper();
+    fetchUser();
+    super.initState();
+  }
+
+  Future fetchUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userTemp = prefs.getString('user') ?? "";
+    setState(() {
+      if (userTemp != "") {
+        user = User.fromJson(jsonDecode(userTemp) as Map<String, dynamic>);
+      }
+    });
+  }
+
   Drawer getDrawer(BuildContext context) {
+    fetchUser();
     var header = DrawerHeader(
       child: Container(
         padding: EdgeInsets.only(left: 10.0),
@@ -33,12 +68,24 @@ class _Home_userState extends State<Home_user> {
                 fontSize: 30.0,
               ),
             ),
-            Text(
-              'User',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-              ),
+            Container(
+                margin: EdgeInsets.only(top: 4),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(user.profilePictureUrl),
+                      radius: 20.0,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      user.fullName.firstName + " " + user.fullName.lastName,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                )
             ),
           ],
         ),
