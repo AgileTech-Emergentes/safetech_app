@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:safetech_app/models/fullname.dart';
 import 'package:safetech_app/models/user.dart';
 
 class HttpHelper {
@@ -48,6 +49,47 @@ class HttpHelper {
       return user;
     } else {
       throw Exception('Failed to load user');
+    }
+  }
+
+  Future<User?> createUser(
+    int id,
+    FullName fullName,
+    String dni,
+    String email,
+    String password,
+    String profilePictureUrl,
+    String address,
+    String phone,
+    String birthdayDate,
+  ) async {
+    final String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/users';
+    Uri url = Uri.parse(urlString);
+
+    final body = {
+      "id": id,
+      "fullName": fullName.toJson(),
+      "dni": dni,
+      "email": email,
+      "password": password,
+      "profilePictureUrl": profilePictureUrl,
+      "address": address,
+      "phone": phone,
+      "birthdayDate": birthdayDate,
+    };
+
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+
+    final response = await http.post(url, headers: headers, body: jsonEncode(body));
+
+    if (response.statusCode == HttpStatus.ok) {
+      final String responseString = response.body;
+      return userFromJson(responseString);
+    } else {
+      return null;
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safetech_app/pages/Upcoming%20appointments.dart';
 import 'package:safetech_app/pages/appointment_history.dart';
 import 'package:safetech_app/pages/authentication/login.dart';
+import 'package:safetech_app/pages/authentication/register.dart';
 import 'package:safetech_app/pages/home_user.dart';
 import 'package:safetech_app/pages/new_appointment.dart';
 import 'package:safetech_app/pages/profile_user.dart';
@@ -13,6 +14,7 @@ void main() {
     home: new Login(),
     routes: <String, WidgetBuilder>{
       Login.routeName: (BuildContext context) => new Login(),
+      Register.routeName: (BuildContext context) => new Register(),
       Home_user.routeName: (BuildContext context) => new Home_user(),
       Profile_user.routeName: (BuildContext context) => new Profile_user(),
       New_appointment.routeName: (BuildContext context) =>

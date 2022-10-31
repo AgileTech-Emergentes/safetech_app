@@ -1,6 +1,7 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:safetech_app/models/user.dart';
+import 'package:safetech_app/pages/authentication/register.dart';
 import 'package:safetech_app/pages/home_user.dart';
 import 'dart:convert';
 
@@ -156,7 +157,7 @@ class _LoginState extends State<Login> {
                     child: Text('Regístrate aquí'),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home_user()));
+                          MaterialPageRoute(builder: (context) => Register()));
                     },
                   )
                 ],
