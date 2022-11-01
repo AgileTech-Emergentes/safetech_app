@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:safetech_app/models/appointment.dart';
 import 'package:safetech_app/models/fullname.dart';
 import 'package:safetech_app/models/user.dart';
 
@@ -92,4 +93,36 @@ class HttpHelper {
       return null;
     }
   }
+
+  Future<List> fetchAppointmentsByUserId(int userId) async {
+    String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/users/${userId}/appointments';
+    Uri url = Uri.parse(urlString);
+
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == HttpStatus.ok) {
+      final jsonResponse = json.decode(response.body);
+      List appointments =
+          jsonResponse.map((map) => Appointment.fromJson(map)).toList();
+      return appointments;
+    }
+    return [];
+  }
+
+  Future<List> fetchAppointmentsByUserIdAndStatus(int userId, String status) async {
+    String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/users/${userId}/status/${status}/appointments';
+    Uri url = Uri.parse(urlString);
+
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == HttpStatus.ok) {
+      final jsonResponse = json.decode(response.body);
+      List appointments = jsonResponse.map((map) => Appointment.fromJson(map)).toList();
+      return appointments;
+    }
+    return [];
+  }
+
 }
