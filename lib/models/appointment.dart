@@ -8,9 +8,9 @@ class Appointment {
   String problemDescription;
   DateTime scheduledAt;
   Address address;
-  Status status;
+  String status;
   Money reparationCost;
-  PaymentStatus paymentStatus;
+  String paymentStatus;
 
   Appointment({
     required this.id,
@@ -28,9 +28,9 @@ class Appointment {
       problemDescription: json["problemDescription"],
       scheduledAt: DateTime.parse(json["scheduledAt"]),
       address: Address.fromJson(json["address"]),
-      status: Status.values[0],
+      status: json["status"],
       reparationCost: Money.fromJson(json["reparationCost"]),
-      paymentStatus: PaymentStatus.values[0]
+      paymentStatus: json["paymentStatus"],
     );
   }
 
@@ -40,9 +40,9 @@ class Appointment {
       "problemDescription": problemDescription,
       "scheduledAt": DateFormat('yyyy-MM-ddTHH:mm:ss').format(scheduledAt),
       "address": address.toJson(),
-      "status": status.index,
+      "status": status,
       "reparationCost": reparationCost.toJson(),
-      "paymentStatus": paymentStatus.index
+      "paymentStatus": paymentStatus
     };
   }
 
