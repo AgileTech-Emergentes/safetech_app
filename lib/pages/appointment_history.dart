@@ -32,13 +32,6 @@ class _Appointment_historyState extends State<Appointment_history> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final id = prefs.getInt('id');
 
-    /*
-    httpHelper.fetchAppointmentsByUserId(id!).then((value) => {
-      setState(() {
-        appointments = value;
-      })
-    });*/
-    
     httpHelper.fetchAppointmentsByUserIdAndStatus(id!, "FINISHED").then((value){
       setState(() {
         this.appointments = value;
@@ -58,7 +51,7 @@ class _Appointment_historyState extends State<Appointment_history> {
        appBar: AppBar(
         title: Text('Appointment History'),
         backgroundColor: Colors.blue,
-       ),
+      ),
        body: ListView.builder(
         itemCount: appointments.length,
         itemBuilder: (BuildContext context, int index) => Container(
