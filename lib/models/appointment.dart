@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:safetech_app/models/address.dart';
 import 'package:safetech_app/models/money.dart';
 
+Appointment appointmentFromJson(String str) => Appointment.fromJson(json.decode(str));
+String appointmentToJson(Appointment data) => json.encode(data.toJson());
+
 class Appointment {
   int id;
   String problemDescription;
