@@ -16,7 +16,7 @@ class Technical {
   String address;
   String phone;
   String birthdayDate;
-  Float score;
+  double score;
   String aboutMe;
 
   Technical({

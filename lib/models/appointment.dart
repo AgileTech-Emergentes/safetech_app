@@ -1,7 +1,13 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:safetech_app/models/address.dart';
+import 'package:safetech_app/models/appliance.dart';
 import 'package:safetech_app/models/money.dart';
+import 'package:safetech_app/models/technical.dart';
+import 'package:safetech_app/models/user.dart';
+
+Appointment appointmentFromJson(String str) => Appointment.fromJson(json.decode(str));
+String appointmentToJson(Appointment data) => json.encode(data.toJson());
 
 class Appointment {
   int id;
@@ -11,6 +17,9 @@ class Appointment {
   String status;
   Money reparationCost;
   String paymentStatus;
+  User user;
+  Technical technical;
+  Appliance appliance;
 
   Appointment({
     required this.id,
@@ -19,7 +28,10 @@ class Appointment {
     required this.address,
     required this.status,
     required this.reparationCost,
-    required this.paymentStatus
+    required this.paymentStatus,
+    required this.user,
+    required this.technical,
+    required this.appliance,
   });
 
   factory Appointment.fromJson(Map<String, dynamic> json) {
@@ -31,6 +43,9 @@ class Appointment {
       status: json["status"],
       reparationCost: Money.fromJson(json["reparationCost"]),
       paymentStatus: json["paymentStatus"],
+      user: User.fromJson(json["user"]),
+      technical: Technical.fromJson(json["technical"]),
+      appliance: Appliance.fromJson(json["appliance"]),
     );
   }
 
@@ -42,7 +57,10 @@ class Appointment {
       "address": address.toJson(),
       "status": status,
       "reparationCost": reparationCost.toJson(),
-      "paymentStatus": paymentStatus
+      "paymentStatus": paymentStatus,
+      "user": user.toJson(),
+      "technical": technical.toJson(),
+      "appliance": appliance.toJson(),
     };
   }
 
