@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safetech_app/pages/Upcoming%20appointments.dart';
+import 'package:safetech_app/pages/upcoming appointments.dart';
 import 'package:safetech_app/pages/appointment_history.dart';
 import 'package:safetech_app/pages/authentication/login.dart';
 import 'package:safetech_app/pages/authentication/register.dart';
