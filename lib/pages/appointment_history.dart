@@ -69,35 +69,29 @@ class _Appointment_historyState extends State<Appointment_history> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                    children: [                     
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Date: ' + DateFormat('yyyy-MM-dd HH:mm a').format(appointments[index].scheduledAt),
+                              Text(DateFormat('yyyy-MM-dd HH:mm a').format(appointments[index].scheduledAt),
+                                   style: TextStyle(
+                                   color: Colors.black                               
+                              )),
+                              SizedBox(height: 5), 
+                              Text('Appointment with ' + appointments[index].technical.fullName.firstName + ' ' + appointments[index].technical.fullName.lastName,
                                    style: TextStyle(
                                    color: Colors.black,
+                                   fontSize: 20,
                                    fontWeight: FontWeight.bold                                
                               )),
                               SizedBox(height: 5),  
-                              Text('Address: ' + appointments[index].address.street + ', ' + appointments[index].address.city,
+                              Text('Reparation of ' + appointments[index].appliance.name,
                                    style: TextStyle(
-                                   color: Colors.black,
-                                   fontWeight: FontWeight.bold                                
-                              )), 
-                              SizedBox(height: 5),  
-                              Text('Status: ' + appointments[index].status,
-                                   style: TextStyle(
-                                   color: Colors.black,
-                                   fontWeight: FontWeight.bold                                
+                                   color: Colors.black                              
                               )),
                             ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 10),
+                          ),                    
+                      SizedBox(width: 25),
                       Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -105,24 +99,18 @@ class _Appointment_historyState extends State<Appointment_history> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              MaterialButton(
+                              IconButton(
+                              icon: const Icon(Icons.description),
                               onPressed: () {      
-                              },                          
-                              color: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Text('See Report', style: TextStyle(color: Colors.white))
+                              }, 
+                              color: Colors.blue,                        
                               ),
 
-                              MaterialButton(
+                              IconButton(
+                              icon: Icon(Icons.reviews),
                               onPressed: () {      
                               },                          
                               color: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Text('Give Review', style: TextStyle(color: Colors.white))
                               ),
                             ],
                           ),
