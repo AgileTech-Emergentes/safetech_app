@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:safetech_app/models/appointment.dart';
 import 'package:safetech_app/models/fullname.dart';
+import 'package:safetech_app/models/report.dart';
 import 'package:safetech_app/models/user.dart';
 
 class HttpHelper {
@@ -124,5 +125,34 @@ class HttpHelper {
     }
     return [];
   }
+
+  Future deleteAppointmentById(int id) async {
+    String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/appointments/${id}';
+    Uri url = Uri.parse(urlString);
+
+    http.Response response = await http.delete(url);
+
+    if (response.statusCode == HttpStatus.ok) {
+      return true;
+    }
+    return false;
+  }
+
+  Future fetchReports() async {
+    String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/reports';
+    Uri url = Uri.parse(urlString);
+
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == HttpStatus.ok) {
+      final jsonResponse = json.decode(response.body);
+      List reports = jsonResponse.map((map) => Report.fromJson(map)).toList();
+      return reports;
+    }
+    return [];
+  }
+
 
 }

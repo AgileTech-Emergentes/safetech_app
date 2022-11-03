@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:safetech_app/models/fullname.dart';
 
@@ -16,7 +15,7 @@ class Technical {
   String address;
   String phone;
   String birthdayDate;
-  Float score;
+  double score;
   String aboutMe;
 
   Technical({
