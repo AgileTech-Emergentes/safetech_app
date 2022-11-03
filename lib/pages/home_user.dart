@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:intl/intl.dart';
 import 'package:safetech_app/models/fullname.dart';
 import 'package:safetech_app/models/user.dart';
 import 'package:safetech_app/utils/http_helper.dart';
@@ -25,6 +26,8 @@ class Home_user extends StatefulWidget {
 class _Home_userState extends State<Home_user> {
   HttpHelper httpHelper = HttpHelper();
 
+  List appointments = [];
+
   User user = new User(
       id: 1,
       fullName: FullName(firstName: "", lastName: ""),
@@ -38,7 +41,9 @@ class _Home_userState extends State<Home_user> {
 
   @override
   void initState() {
+    appointments = [];
     httpHelper = HttpHelper();
+    fetchAppointmentsByUserIdAndStatus();
     fetchUser();
     super.initState();
   }
@@ -51,6 +56,19 @@ class _Home_userState extends State<Home_user> {
         user = User.fromJson(jsonDecode(userTemp) as Map<String, dynamic>);
       }
     });
+  }
+
+  Future fetchAppointmentsByUserIdAndStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final id = prefs.getInt('id');
+    httpHelper
+        .fetchAppointmentsByUserIdAndStatus(id!, "SCHEDULED")
+        .then((value) {
+      setState(() {
+        this.appointments = value;
+      });
+    });
+    return appointments;
   }
 
   Drawer getDrawer(BuildContext context) {
@@ -85,8 +103,7 @@ class _Home_userState extends State<Home_user> {
                       ),
                     ),
                   ],
-                )
-            ),
+                )),
           ],
         ),
       ),
@@ -138,7 +155,7 @@ class _Home_userState extends State<Home_user> {
       body: Container(
         child: Center(
           child: Column(
-            children: [
+            children: <Widget>[
               CarouselSlider(
                 options: CarouselOptions(
                   autoPlay: true,
@@ -167,22 +184,43 @@ class _Home_userState extends State<Home_user> {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                'Welcome to SafeTech',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'We are here to help you with your health',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              ),
+              Expanded(
+                  child: ListView.builder(
+                      padding: EdgeInsets.all(10),
+                      itemCount: appointments.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                          elevation: 10,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                        "Appointment date: " +
+                                            DateFormat('yyyy-MM-dd HH:mm a')
+                                                .format(appointments[index]
+                                                    .scheduledAt),
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black)),
+                                  ],
+                                ),
+                              ),
+                              Text(appointments[index].problemDescription,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                  DateFormat('yyyy-MM-dd HH:mm a')
+                                      .format(appointments[index].scheduledAt),
+                                  style: TextStyle(color: Colors.black)),
+                            ],
+                          ),
+                        );
+                      }))
             ],
           ),
         ),
