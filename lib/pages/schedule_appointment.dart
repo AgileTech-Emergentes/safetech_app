@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safetech_app/models/appliance.dart';
-import 'package:safetech_app/models/diagnosis_cost.dart';
+import 'package:safetech_app/models/money.dart';
 import 'package:safetech_app/utils/http_new_appointment.dart';
 
 class ScheduleAppointment extends StatefulWidget {
@@ -29,7 +29,7 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
     id: 0,
     name: '',
     imgUrl: '',
-    diagnosisCost: DiagnosisCost(amount: 0, currency: ""),
+    diagnosisCost: Money(amount: 0, currency: ""),
   );
 
   Future getAppliances() async {
