@@ -8,12 +8,12 @@ import 'package:safetech_app/utils/http_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  'https://www.confianzaelectro.com/wp-content/uploads/2017/10/Reparacion-electrodomesticos-1024x684.jpg',
+  'https://st2.depositphotos.com/1010613/6270/i/600/depositphotos_62702033-stock-photo-technician-writing-on-clipboard-in.jpg',
+  'http://blog.camellar.com/wp-content/uploads/2016/08/reparacion_de_lavadoras.png',
+  'https://st3.depositphotos.com/1010613/14432/i/450/depositphotos_144320019-stock-photo-serviceman-working-on-fridge.jpg',
+  'https://estaticos.qdq.com/swdata/home_photos/913/913916534/b66d550c746a4ac3bf62746dc97ff189.jpg',
+  'https://serviciotecnicoadomicilio.pe/wp-content/uploads/2020/09/aire-acondicionado-barato-min.jpg',
 ];
 
 class Home_user extends StatefulWidget {
@@ -175,7 +175,7 @@ class _Home_userState extends State<Home_user> {
                               child: Stack(
                                 children: <Widget>[
                                   Image.network(item,
-                                      fit: BoxFit.cover, width: 1000.0),
+                                      fit: BoxFit.cover, width: 1000, height: 700),
                                 ],
                               )),
                         )))
@@ -186,40 +186,96 @@ class _Home_userState extends State<Home_user> {
               ),
               Expanded(
                   child: ListView.builder(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(5),
                       itemCount: appointments.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          elevation: 10,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.all(10),
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: Card(
+                              color: Colors.white,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    Text(
-                                        "Appointment date: " +
-                                            DateFormat('yyyy-MM-dd HH:mm a')
-                                                .format(appointments[index]
-                                                    .scheduledAt),
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.2,
+                                          height: 70,
+                                          child: CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                appointments[index]
+                                                    .technical
+                                                    .profilePictureUrl),
+                                          ),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.4,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(
+                                                          appointments[index]
+                                                              .scheduledAt),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black)),
+                                              SizedBox(height: 5),
+                                              Text(
+                                                  'Appointment with ' +
+                                                      appointments[index]
+                                                          .technical
+                                                          .fullName
+                                                          .firstName +
+                                                      ' ' +
+                                                      appointments[index]
+                                                          .technical
+                                                          .fullName
+                                                          .lastName,
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              SizedBox(height: 5),
+                                              Text(
+                                                  'Reparation of ' +
+                                                      appointments[index]
+                                                          .appliance
+                                                          .name,
+                                                  style: TextStyle(
+                                                      color: Colors.black)),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
                                   ],
                                 ),
                               ),
-                              Text(appointments[index].problemDescription,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold)),
-                              Text(
-                                  DateFormat('yyyy-MM-dd HH:mm a')
-                                      .format(appointments[index].scheduledAt),
-                                  style: TextStyle(color: Colors.black)),
-                            ],
-                          ),
-                        );
+                            ));
                       }))
             ],
           ),
