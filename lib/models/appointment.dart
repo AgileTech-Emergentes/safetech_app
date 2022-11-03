@@ -9,9 +9,6 @@ import 'package:safetech_app/models/user.dart';
 Appointment appointmentFromJson(String str) => Appointment.fromJson(json.decode(str));
 String appointmentToJson(Appointment data) => json.encode(data.toJson());
 
-Appointment appointmentFromJson(String str) => Appointment.fromJson(json.decode(str));
-String appointmentToJson(Appointment data) => json.encode(data.toJson());
-
 class Appointment {
   int id;
   String problemDescription;
@@ -67,17 +64,4 @@ class Appointment {
     };
   }
 
-}
-
-enum Status { 
-  SCHEDULED,
-  FINISHED,
-  CANCELED
-}
-
-enum PaymentStatus { 
-  SUCCEED,
-  FAILED,
-  PROCESSING,
-  REFUNDED
 }
