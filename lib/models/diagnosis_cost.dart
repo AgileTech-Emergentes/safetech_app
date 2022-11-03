@@ -1,15 +1,14 @@
-import 'dart:convert';
-class Money {
+class DiagnosisCost {
   int amount;
   String currency;
 
-  Money({
+  DiagnosisCost({
     required this.amount,
     required this.currency,
   });
 
-  factory Money.fromJson(Map<String, dynamic> json) {
-    return Money(
+  factory DiagnosisCost.fromJson(Map<String, dynamic> json) {
+    return DiagnosisCost(
       amount: json["amount"],
       currency: json["currency"],
     );

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:safetech_app/models/fullname.dart';
 
 Technical technicalFromJson(String str) => Technical.fromJson(json.decode(str));
@@ -64,3 +63,4 @@ class Technical {
     };
   }
 }
+

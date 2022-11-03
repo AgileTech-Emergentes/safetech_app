@@ -6,6 +6,7 @@ import 'package:safetech_app/pages/authentication/register.dart';
 import 'package:safetech_app/pages/home_user.dart';
 import 'package:safetech_app/pages/new_appointment.dart';
 import 'package:safetech_app/pages/profile_user.dart';
+import 'package:safetech_app/pages/schedule_appointment.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -23,6 +24,8 @@ void main() {
           new Upcoming_appointments(),
       Appointment_history.routeName: (BuildContext context) =>
           new Appointment_history(),
+      ScheduleAppointment.routeName: (BuildContext context) =>
+          new ScheduleAppointment()
     },
   ));
 }

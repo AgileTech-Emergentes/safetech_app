@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 class Address {
   String street;
   String city;
