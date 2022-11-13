@@ -85,11 +85,32 @@ class HttpHelper {
       'Content-Type': 'application/json',
     };
 
-    final response = await http.post(url, headers: headers, body: jsonEncode(body));
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(body));
 
     if (response.statusCode == HttpStatus.ok) {
       final String responseString = response.body;
       return userFromJson(responseString);
+    } else {
+      return null;
+    }
+  }
+
+  Future updateUser(int id, User request) async {
+    final String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/users/${id}';
+    Uri url = Uri.parse(urlString);
+
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+
+    final response =
+        await http.put(url, headers: headers, body: jsonEncode(request));
+
+    if (response.statusCode == HttpStatus.ok) {
+      var user = User.fromJson(json.decode(response.body));
+      return user;
     } else {
       return null;
     }
@@ -111,7 +132,8 @@ class HttpHelper {
     return [];
   }
 
-  Future<List> fetchAppointmentsByUserIdAndStatus(int userId, String status) async {
+  Future<List> fetchAppointmentsByUserIdAndStatus(
+      int userId, String status) async {
     String urlString =
         'https://neural-guard-366803.rj.r.appspot.com/api/v1/users/${userId}/status/${status}/appointments';
     Uri url = Uri.parse(urlString);
@@ -120,7 +142,8 @@ class HttpHelper {
 
     if (response.statusCode == HttpStatus.ok) {
       final jsonResponse = json.decode(response.body);
-      List appointments = jsonResponse.map((map) => Appointment.fromJson(map)).toList();
+      List appointments =
+          jsonResponse.map((map) => Appointment.fromJson(map)).toList();
       return appointments;
     }
     return [];
@@ -153,6 +176,4 @@ class HttpHelper {
     }
     return [];
   }
-
-
 }
