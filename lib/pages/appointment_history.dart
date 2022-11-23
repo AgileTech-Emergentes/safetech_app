@@ -308,9 +308,10 @@ class _Appointment_historyState extends State<Appointment_history> {
                               icon: Icon(Icons.reviews),
                               onPressed: () { 
                                 //navigation to review page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Review()),
+                                Navigator.pushNamed(
+                                  context, 
+                                  '/review', 
+                                  arguments: appointments[index]
                                 );
                               },                          
                               color: Colors.blue,

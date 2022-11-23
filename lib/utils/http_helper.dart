@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:safetech_app/models/appointment.dart';
 import 'package:safetech_app/models/fullname.dart';
 import 'package:safetech_app/models/report.dart';
+import 'package:safetech_app/models/review.dart';
 import 'package:safetech_app/models/user.dart';
 
 class HttpHelper {
@@ -175,5 +176,41 @@ class HttpHelper {
       return reports;
     }
     return [];
+  }
+
+  Future<Review?> createReview(String text, int userId, int technicalId, int appointmentId) async {
+    final String urlString = 
+    'https://neural-guard-366803.rj.r.appspot.com/api/v1/reviews/user/${userId}/technical/${technicalId}/appointment/${appointmentId}';
+    Uri url = Uri.parse(urlString);
+
+    final body = {
+      "text": text,
+    };
+
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+
+    final response = await http.post(url, headers: headers, body: jsonEncode(body));
+
+    if (response.statusCode == HttpStatus.ok) {
+      final String responseString = response.body;
+      return reviewFromJson(responseString);
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> appointmentHasReview(int appointmentId) async {
+    final String urlString =
+        'https://neural-guard-366803.rj.r.appspot.com/api/v1/reviews/appointment/${appointmentId}';
+    Uri url = Uri.parse(urlString);
+    
+    http.Response response = await http.get(url);
+    if(response.statusCode == HttpStatus.ok) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
