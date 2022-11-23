@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/date_time_patterns.dart';
 import 'package:intl/intl.dart';
 import 'package:safetech_app/models/fullname.dart';
 import 'package:safetech_app/models/user.dart';
@@ -22,8 +23,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
   final TextEditingController controllerFirstName = TextEditingController();
   final TextEditingController controllerLastName = TextEditingController();
   final TextEditingController controllerDni = TextEditingController();
-  final TextEditingController controllerProfilePictureUrl =
-      TextEditingController();
+  final TextEditingController controllerProfilePictureUrl = TextEditingController();
   final TextEditingController controllerAddress = TextEditingController();
   final TextEditingController controllerPhone = TextEditingController();
   final TextEditingController controllerBirthdayDate = TextEditingController();
@@ -37,9 +37,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
     controllerProfilePictureUrl.text = widget.user.profilePictureUrl;
     controllerAddress.text = widget.user.address;
     controllerPhone.text = widget.user.phone;
-    controllerBirthdayDate.text = widget.user.birthdayDate;
-
-    //controllerBirthdayDate.text = DateFormat('dd/MM/yyyy').format(DateTime.parse(widget.user.birthdayDate));
+    controllerBirthdayDate.text = widget.user.birthdayDate.toString().substring(0, 10);
     super.initState();
   }
 
