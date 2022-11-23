@@ -181,9 +181,20 @@ class _Home_userState extends State<Home_user> {
                         )))
                     .toList(),
               ),
-              SizedBox(
-                height: 20,
+              Divider(
+                height: 5,
+                thickness: 2,
+                indent: 50,
+                endIndent: 50,
               ),
+              Text(
+                'Upcoming Appointments',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20.0,
+                ),
+              ),
+              SizedBox(height: 10),
               Expanded(
                   child: ListView.builder(
                       padding: EdgeInsets.all(5),
@@ -192,13 +203,16 @@ class _Home_userState extends State<Home_user> {
                         return Container(
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                                horizontal: 10, vertical: 5),
                             child: Card(
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               color: Colors.white,
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
+                                    horizontal: 10, vertical: 5),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

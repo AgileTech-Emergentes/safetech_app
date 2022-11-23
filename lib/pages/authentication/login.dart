@@ -40,8 +40,6 @@ class _LoginState extends State<Login> {
     return user;
   }
 
- 
-
   void generalLogin(String email, String password) async {
     try {
       User? user = await getUserByEmail(email);
@@ -49,16 +47,14 @@ class _LoginState extends State<Login> {
         saveUserData(user.id);
         if (user.password == password) {
           Navigator.push(
-            context, 
-            MaterialPageRoute(
-              builder: (context) => Home_user()));
+              context, MaterialPageRoute(builder: (context) => Home_user()));
         }
       }
     } catch (e) {
       print("Error logging the user");
     }
   }
-  
+
   Future<void> saveUserData(int id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     User user = await httpHelper.fetchUserById(id);
@@ -66,11 +62,12 @@ class _LoginState extends State<Login> {
     prefs.setString('user', user1);
     await prefs.setInt('id', id);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 40.0),
         width: MediaQuery.of(context).size.width,
         child: Align(
           alignment: Alignment.center,
@@ -78,7 +75,6 @@ class _LoginState extends State<Login> {
               child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-            
               Padding(
                 padding: EdgeInsets.only(bottom: 10.0),
                 child: Text('SafeTech',
@@ -96,51 +92,44 @@ class _LoginState extends State<Login> {
                   style: TextStyle(fontSize: 14, height: 0.5),
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.06,
-                margin: EdgeInsets.only(bottom: 12.0),
-                child: TextField(
-                  controller: myEmail,
-                  decoration: InputDecoration(
+              SizedBox(height: 10),
+              TextFormField(
+                controller: myEmail,
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                  isDense: true,
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                ),
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: myPassword,
+                obscureText: !_passwordVisible,
+                decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 13, vertical: 10),
                     isDense: true,
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                  ),
-                ),
+                    labelText: 'Password',
+                    hintText: 'Enter your password',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                    )),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.06,
-                margin: EdgeInsets.only(bottom: 8.0),
-                child: TextField(
-                  controller: myPassword,
-                  obscureText: !_passwordVisible,
-                  decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-                      isDense: true,
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter your password',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                      )),
-                ),
-              ),
+              SizedBox(height: 10),
               ElevatedButton(
                 child: Text('Iniciar sesión',
                     style: TextStyle(

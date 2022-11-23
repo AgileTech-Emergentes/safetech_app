@@ -120,7 +120,7 @@ class _RegisterState extends State<Register> {
                       if (controllerDni == null || controllerDni.isEmpty) {
                         return 'Por favor ingrese su DNI';
                       }
-                      if (controllerDni.length < 8) {
+                      if (controllerDni.length < 8 || controllerDni.length > 8) {
                         return 'Por favor ingrese un DNI válido';
                       }
                       return null;

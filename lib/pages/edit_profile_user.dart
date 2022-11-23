@@ -37,7 +37,9 @@ class _EditProfileUserState extends State<EditProfileUser> {
     controllerProfilePictureUrl.text = widget.user.profilePictureUrl;
     controllerAddress.text = widget.user.address;
     controllerPhone.text = widget.user.phone;
-    controllerBirthdayDate.text = DateFormat('dd/MM/yyyy').format(DateTime.parse(widget.user.birthdayDate));
+    controllerBirthdayDate.text = widget.user.birthdayDate;
+
+    //controllerBirthdayDate.text = DateFormat('dd/MM/yyyy').format(DateTime.parse(widget.user.birthdayDate));
     super.initState();
   }
 
