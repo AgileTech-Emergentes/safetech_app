@@ -65,7 +65,7 @@ class _TechnicalProfileState extends State<TechnicalProfile> {
       appBar: AppBar(
         title:
             Text('Perfil del técnico ' + selectedTechnical.fullName.firstName),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(115, 103, 240, 94),
       ),
       body: Column(
         children: [

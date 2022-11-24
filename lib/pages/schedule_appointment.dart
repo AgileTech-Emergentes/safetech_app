@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:safetech_app/models/appliance.dart';
+import 'package:safetech_app/models/fullname.dart';
 import 'package:safetech_app/models/money.dart';
+import 'package:safetech_app/models/user.dart';
+import 'package:safetech_app/utils/http_helper.dart';
 import 'package:safetech_app/utils/http_new_appointment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,7 +36,20 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
   DateTime? finalDate;
   int? userId;
 
+  User user = new User(
+      id: 0,
+      fullName: FullName(firstName: "", lastName: ""),
+      dni: "",
+      email: "",
+      password: "",
+      profilePictureUrl: "",
+      address: "",
+      phone: "",
+      birthdayDate: "");
+
   HttpNewAppointment httpNewAppointment = HttpNewAppointment();
+
+  HttpHelper httpHelper = HttpHelper();
 
   Appliance selectedAppliance = Appliance(
     id: 0,
@@ -100,13 +118,25 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
     }
   }
 
+  Future fetchUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userTemp = prefs.getString('user') ?? "";
+    setState(() {
+      if (userTemp != "") {
+        user = User.fromJson(jsonDecode(userTemp) as Map<String, dynamic>);
+      }
+    });
+  }
+
   void buildShifts() {
     for (int i = 0; i < shifts.length; i++) {}
   }
 
   void initState() {
     super.initState();
+    httpHelper = HttpHelper();
     getShifts();
+    fetchUser();
     Future.delayed(Duration.zero, () {
       setState(() {
         selectedAppliance =
@@ -121,6 +151,7 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
       return Scaffold(
         appBar: AppBar(
           title: const Text("Agendar una cita"),
+          backgroundColor: Color.fromRGBO(115, 103, 240, 94),
         ),
         body: const Center(
           child: CircularProgressIndicator(),
@@ -130,6 +161,7 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
       return Scaffold(
         appBar: AppBar(
           title: const Text("Agendar una cita"),
+          backgroundColor: Color.fromRGBO(115, 103, 240, 94),
         ),
         body: Column(
           children: [
@@ -403,9 +435,14 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
                                                 finalDate!,
                                                 technical.id);
                                         Navigator.popAndPushNamed(
-                                            context, '/home_user');
+                                            context, '/home_user',
+                                            arguments: user);
                                       },
                                       style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color.fromRGBO(
+                                                    255, 159, 68, 100)),
                                         minimumSize: MaterialStateProperty.all(
                                           Size(
                                               MediaQuery.of(context)
@@ -443,6 +480,8 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
                                       child: Text(
                                         'Ver Perfil',
                                         style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 159, 68, 100),
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                         ),

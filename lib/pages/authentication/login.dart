@@ -46,8 +46,8 @@ class _LoginState extends State<Login> {
       if (user != null) {
         saveUserData(user.id);
         if (user.password == password) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Home_user()));
+          Navigator.popAndPushNamed(context, '/home_user',
+          arguments: user);
         }
       }
     } catch (e) {

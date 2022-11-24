@@ -29,7 +29,7 @@ class _Home_userState extends State<Home_user> {
   List appointments = [];
 
   User user = new User(
-      id: 1,
+      id: 0,
       fullName: FullName(firstName: "", lastName: ""),
       dni: "",
       email: "",
@@ -41,9 +41,14 @@ class _Home_userState extends State<Home_user> {
 
   @override
   void initState() {
-    appointments = [];
     httpHelper = HttpHelper();
-    fetchAppointmentsByUserIdAndStatus();
+    appointments = [];
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        user = ModalRoute.of(context)?.settings.arguments as User;    
+        getAppointmentsByUserIdAndStatus(user.id);
+      });
+    });
     fetchUser();
     super.initState();
   }
@@ -56,6 +61,19 @@ class _Home_userState extends State<Home_user> {
         user = User.fromJson(jsonDecode(userTemp) as Map<String, dynamic>);
       }
     });
+  }
+
+  Future getAppointmentsByUserIdAndStatus(int id) async {
+    httpHelper
+        .fetchAppointmentsByUserIdAndStatus(id, "SCHEDULED")
+        .then((value) => {
+              setState(() {
+                this.appointments = value;
+              })
+            });
+
+    return appointments;
+    
   }
 
   Future fetchAppointmentsByUserIdAndStatus() async {
@@ -176,7 +194,9 @@ class _Home_userState extends State<Home_user> {
                               child: Stack(
                                 children: <Widget>[
                                   Image.network(item,
-                                      fit: BoxFit.cover, width: 1000, height: 700),
+                                      fit: BoxFit.cover,
+                                      width: 1000,
+                                      height: 700),
                                 ],
                               )),
                         )))

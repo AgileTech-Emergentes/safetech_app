@@ -127,6 +127,10 @@ class _Appointment_historyState extends State<Appointment_history> {
   Widget build(BuildContext context) {
   if(appointments.length == 0){
       return Scaffold(
+        appBar: AppBar(
+          title: Text("Historial de citas"),
+          backgroundColor: Color.fromRGBO(115, 103, 240, 94),
+        ),
         body: Center(child: CircularProgressIndicator()),
       );
     }

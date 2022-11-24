@@ -42,6 +42,7 @@ class _New_appointmentState extends State<New_appointment> {
       return Scaffold(
         appBar: AppBar(
           title: const Text("Agendar una cita"),
+          backgroundColor: Color.fromRGBO(115, 103, 240, 94),
         ),
         body: const Center(
           child: CircularProgressIndicator(),
@@ -51,7 +52,7 @@ class _New_appointmentState extends State<New_appointment> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Agendar una cita'),
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(115, 103, 240, 94),
         ),
         body: Column(
           children: [
