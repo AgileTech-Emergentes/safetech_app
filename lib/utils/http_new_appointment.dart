@@ -6,6 +6,7 @@ import 'package:safetech_app/models/appliance.dart';
 import 'package:http/http.dart' as http;
 import 'package:safetech_app/models/appointment.dart';
 import 'package:safetech_app/models/money.dart';
+import 'package:safetech_app/models/review.dart';
 import 'package:safetech_app/models/technical.dart';
 
 import '../models/shift.dart';
@@ -103,7 +104,6 @@ class HttpNewAppointment {
     String urlString = baseUrl +
         'users/${userId}/technicals/${technicalId}/appliance/${applianceId}/appointments';
 
-    print(urlString);
     Uri url = Uri.parse(urlString);
 
     Address address = Address(country: country, city: city, street: street);
@@ -127,15 +127,45 @@ class HttpNewAppointment {
     http.Response response =
         await http.post(url, headers: headers, body: jsonEncode(body));
 
-    print(response.body);
-
     if (response.statusCode == HttpStatus.created) {
-      print("llego");
       final jsonResponse = json.decode(response.body);
       Appointment appointment = Appointment.fromJson(jsonResponse);
       return appointment;
     } else {
       return null;
+    }
+  }
+
+  Future<List> fetchReviewsByTechnicalId(int technicalId) async {
+    String urlString = baseUrl + 'reviews/technical/${technicalId}';
+    Uri url = Uri.parse(urlString);
+
+    http.Response response = await http.get(url);
+
+    print(urlString);
+
+    if (response.statusCode == HttpStatus.ok) {
+      final jsonResponse = json.decode(response.body);
+      List reviews = jsonResponse.map((map) => Review.fromJson(map)).toList();
+      print(reviews);
+      return reviews;
+    }
+    return [];
+  }
+
+  Future<Technical> getAverageScoreByTechnicalId(int technicalId) async {
+    String urlString = baseUrl + 'technicals/averageScore/${technicalId}';
+    Uri url = Uri.parse(urlString);
+
+    http.Response response = await http.get(url);
+
+    if (response.statusCode == HttpStatus.ok) {
+      final jsonResponse = json.decode(response.body);
+      Technical technical = Technical.fromJson(jsonResponse);
+      print(technical);
+      return technical;
+    } else {
+      throw Exception('Failed to load score');
     }
   }
 }

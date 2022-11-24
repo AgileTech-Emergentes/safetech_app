@@ -427,7 +427,8 @@ class _ScheduleAppointmentState extends State<ScheduleAppointment> {
                                     OutlinedButton(
                                       onPressed: () async {
                                         Navigator.popAndPushNamed(
-                                            context, '/technical_profile');
+                                            context, '/technical_profile',
+                                            arguments: technical);
                                       },
                                       style: ButtonStyle(
                                         minimumSize: MaterialStateProperty.all(
