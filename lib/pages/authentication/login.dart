@@ -75,6 +75,12 @@ class _LoginState extends State<Login> {
               child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Image.network(
+                'https://media.discordapp.net/attachments/729537977092407390/1045150784289001472/image2.jpg?width=890&height=890',
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.33
+              ),
+              SizedBox(height: 20.0),
               Padding(
                 padding: EdgeInsets.only(bottom: 10.0),
                 child: Text('SafeTech',
@@ -82,7 +88,7 @@ class _LoginState extends State<Login> {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      color: Color.fromRGBO(115, 103, 240, 94),
                     )),
               ),
               Padding(
@@ -131,6 +137,9 @@ class _LoginState extends State<Login> {
               ),
               SizedBox(height: 10),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromRGBO(255, 159, 68, 100),
+                ),
                 child: Text('Iniciar sesión',
                     style: TextStyle(
                       fontSize: 16,
@@ -143,6 +152,9 @@ class _LoginState extends State<Login> {
                 children: [
                   Text('¿No tiene cuenta?'),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Color.fromRGBO(255, 159, 68, 100),
+                    ),
                     child: Text('Regístrate aquí'),
                     onPressed: () {
                       Navigator.push(context,

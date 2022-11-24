@@ -153,7 +153,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                           splashRadius: 20,
                           icon: Icon(
                             Icons.calendar_today,
-                            color: Theme.of(context).primaryColorDark,
+                            color: Color.fromRGBO(255, 159, 68, 100),
                           ),
                           onPressed: () {
                             _selectDate(context);
@@ -161,6 +161,9 @@ class _EditProfileUserState extends State<EditProfileUser> {
                 ),
                 SizedBox(height: 16),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(255, 159, 68, 100),
+                  ),
                   child: Text('Guardar'),
                   onPressed: () async {
                     FullName fullName = FullName(

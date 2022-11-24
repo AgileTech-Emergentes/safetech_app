@@ -82,7 +82,7 @@ class _Profile_userState extends State<Profile_user> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Profile'),
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(115, 103, 240, 94),
         ),
         body: Container(
           child: Column(
@@ -161,6 +161,9 @@ class _Profile_userState extends State<Profile_user> {
                             alignment: MainAxisAlignment.center,
                             children: <Widget>[
                               ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color.fromRGBO(255, 159, 68, 100),
+                                  ),
                                   child: Text("Editar Perfil"),
                                   onPressed: () {
                                     showDialog(

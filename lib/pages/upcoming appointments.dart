@@ -99,7 +99,7 @@ class _Upcoming_appointmentsState extends State<Upcoming_appointments> {
       return Scaffold(
        appBar: AppBar(
         title: Text('Upcoming Appointments'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(115, 103, 240, 94),
       ),
        body: ListView.builder(
         itemCount: appointments.length,
@@ -286,6 +286,9 @@ class _Upcoming_appointmentsState extends State<Upcoming_appointments> {
                                             ), 
                                             SizedBox(height: 10),
                                             ElevatedButton(
+                                               style: ElevatedButton.styleFrom(
+                                                primary: Color.fromRGBO(255, 159, 68, 100),
+                                               ),
                                               onPressed: ()=> Navigator.pop(context), 
                                               child: Text('CLOSE'),
                                             )
@@ -293,7 +296,7 @@ class _Upcoming_appointmentsState extends State<Upcoming_appointments> {
                                       ))
                                     );   
                                   },
-                                  color: Colors.blue,
+                                  color: Color.fromRGBO(255, 159, 68, 100),
                                 )
                             ],
                           ),

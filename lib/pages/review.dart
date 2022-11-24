@@ -79,7 +79,7 @@ class _ReviewState extends State<Review> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Review'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(115, 103, 240, 94),
       ),
       body: getBody(),
     );
@@ -112,6 +112,9 @@ class _ReviewState extends State<Review> {
         ), 
         SizedBox(height: 15),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromRGBO(255, 159, 68, 100),
+          ),
           onPressed: () async {
             // Validate returns true if the form is valid, or false otherwise.
             if (controllerText.text.isNotEmpty) {

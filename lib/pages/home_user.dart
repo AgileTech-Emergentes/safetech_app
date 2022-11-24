@@ -108,7 +108,7 @@ class _Home_userState extends State<Home_user> {
         ),
       ),
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Color.fromRGBO(115, 103, 240, 94),
       ),
     );
 
@@ -151,6 +151,7 @@ class _Home_userState extends State<Home_user> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Home User'),
+        backgroundColor: Color.fromRGBO(115, 103, 240, 94),
       ),
       body: Container(
         child: Center(
@@ -190,7 +191,7 @@ class _Home_userState extends State<Home_user> {
               Text(
                 'Upcoming Appointments',
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Color.fromRGBO(115, 103, 240, 94),
                   fontSize: 20.0,
                 ),
               ),

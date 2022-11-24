@@ -134,7 +134,7 @@ class _Appointment_historyState extends State<Appointment_history> {
       return Scaffold(
        appBar: AppBar(
         title: Text('Appointment History'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(115, 103, 240, 94),
       ),
        body: ListView.builder(
         itemCount: appointments.length,
@@ -302,7 +302,7 @@ class _Appointment_historyState extends State<Appointment_history> {
 
                                   )));
                               }, 
-                              color: Colors.blue,                        
+                              color: Color.fromRGBO(255, 159, 68, 100),                        
                               ),
                               IconButton(
                               icon: Icon(Icons.reviews),
@@ -314,7 +314,7 @@ class _Appointment_historyState extends State<Appointment_history> {
                                   arguments: appointments[index]
                                 );
                               },                          
-                              color: Colors.blue,
+                              color: Color.fromRGBO(255, 159, 68, 100),
                               ),
                             ],
                           ),

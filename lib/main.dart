@@ -11,8 +11,16 @@ import 'package:safetech_app/pages/schedule_appointment.dart';
 
 void main() {
   runApp(new MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: 'SafeTech',
-    theme: ThemeData(fontFamily: 'NotoSans'),
+    theme: ThemeData(
+      primaryColor: Color.fromRGBO(115, 103, 240, 94), 
+      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color.fromRGBO(255, 159, 68, 100)),   
+      buttonTheme: ButtonThemeData(
+        buttonColor: Color.fromRGBO(255, 159, 68, 100),
+        textTheme: ButtonTextTheme.primary,
+      ),        
+    ),
     home: new Login(),
     routes: <String, WidgetBuilder>{
       Login.routeName: (BuildContext context) => new Login(),

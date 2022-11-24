@@ -189,7 +189,7 @@ class _RegisterState extends State<Register> {
                               _passwordVisible
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: Theme.of(context).primaryColorDark,
+                              color: Color.fromRGBO(255, 159, 68, 100),
                             ),
                             onPressed: () {
                               setState(() {
@@ -258,7 +258,7 @@ class _RegisterState extends State<Register> {
                             splashRadius: 20,
                             icon: Icon(
                               Icons.calendar_today,
-                              color: Theme.of(context).primaryColorDark,
+                              color: Color.fromRGBO(255, 159, 68, 100),
                             ),
                             onPressed: () {
                               _selectDate(context);
@@ -266,6 +266,9 @@ class _RegisterState extends State<Register> {
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromRGBO(255, 159, 68, 100),
+                    ),
                       child: Text('Registrarse',
                           style: TextStyle(
                               fontSize: 16.0,
