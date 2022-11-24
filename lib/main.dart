@@ -8,6 +8,7 @@ import 'package:safetech_app/pages/new_appointment.dart';
 import 'package:safetech_app/pages/profile_user.dart';
 import 'package:safetech_app/pages/review.dart';
 import 'package:safetech_app/pages/schedule_appointment.dart';
+import 'package:safetech_app/pages/technical_profile.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -27,6 +28,8 @@ void main() {
       Register.routeName: (BuildContext context) => new Register(),
       Home_user.routeName: (BuildContext context) => new Home_user(),
       Profile_user.routeName: (BuildContext context) => new Profile_user(),
+      TechnicalProfile.routeName: (BuildContext context) =>
+          new TechnicalProfile(),
       New_appointment.routeName: (BuildContext context) =>
           new New_appointment(),
       Upcoming_appointments.routeName: (BuildContext context) =>

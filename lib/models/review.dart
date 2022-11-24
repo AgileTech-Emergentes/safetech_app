@@ -10,6 +10,8 @@ String reviewToJson(Review data) => json.encode(data.toJson());
 class Review {
   int id;
   String text;
+  double score;
+  double magnitude;
   User user;
   Technical technical;
   Appointment appointment;
@@ -17,6 +19,8 @@ class Review {
   Review({
     required this.id,
     required this.text,
+    required this.score,
+    required this.magnitude,
     required this.user,
     required this.technical,
     required this.appointment,
@@ -26,6 +30,8 @@ class Review {
     return Review(
       id: json["id"],
       text: json["text"],
+      score: json["score"],
+      magnitude: json["magnitude"],
       user: User.fromJson(json["user"]),
       technical: Technical.fromJson(json["technical"]),
       appointment: Appointment.fromJson(json["appointment"]),
@@ -36,6 +42,8 @@ class Review {
     return {
       "id": id,
       "text": text,
+      "score": score,
+      "magnitude": magnitude,
       "user": user.toJson(),
       "technical": technical.toJson(),
       "appointment": appointment.toJson(),
